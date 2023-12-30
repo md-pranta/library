@@ -2,3 +2,7 @@ crispy-bootstrap5
 Django
 django-crispy-forms
 django-environ
+Pillow
+python-decouple
+sqlparse
+tzdata
