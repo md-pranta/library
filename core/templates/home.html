@@ -1,0 +1,59 @@
+{% extends 'base.html' %} {% load static %} {% block head_title %}LIBRARY
+System{% endblock %} {% block content %}
+<div
+  class="container mx-auto flex flex-col md:flex-row items-center my-12 md:my-24"
+>
+  <div
+    class="flex flex-col w-full lg:w-1/2 justify-center items-start pt-12 pb-24 px-6 bg-white rounded-2xl bg-opacity-70 mx-3"
+  >
+    <h1 class="font-bold text-4xl my-4">Welcome to Django LIBRARY</h1>
+    <p class="leading-normal mb-4">
+      This is a simple Mamar Bank where you can deposit money, withdraw money,
+      take loan. You can also create an account, login, logout. Lorem ipsum
+      dolor sit amet consectetur adipisicing elit. Sed nemo quaerat quo dicta,
+      adipisci eum fuga ratione id numquam eius veniam placeat voluptatum,
+      itaque tempora molestias vel, blanditiis fugiat ipsam!
+    </p>
+  </div>
+  <div class="w-full lg:w-1/2 lg:py-6 text-center">
+    <img class="rounded-2xl w-full" src="{% static './library2.jpg' %}" />
+  </div>
+</div>
+
+<div class="container text-center mt-5">
+    {% for i in category %}
+        <a class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 shadow-lg shadow-teal-500/50 dark:shadow-lg dark:shadow-teal-800/80 font-medium rounded-lg text-sm px-5 py-3 text-center me-2 mb-2" href="{% url 'category_wise' i.slug %}">  {{i.name}}</a>
+    {% endfor %}
+</div>
+
+
+
+<div class="container mb-5">
+        <br><button class="mb-8">{{data | length}} result found</button><br>
+        <div class="grid grid-cols-4 gap-4">
+            {% for i in data %}
+                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-12">
+                        <img class="rounded-t-lg py-2 flex justify-center " src="{{i.image.url}}" alt="" />
+                   
+                    <div class="p-5">
+                        
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Name : {{i.title}}</h5>
+                        
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Price : {{i.price}}</p>
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{i.description | truncatewords:10}}</p>
+                        <div class="mb-2">
+                            Categories : -
+                            {% for j in i.category.all %}
+                            <button class="relative inline-flex items-center justify-center px-2 py-1 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 disabled" disabled>{{j.name}}</button>
+                            {% endfor %}
+                        </div>
+                        <a href="{% url 'details' i.id %}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            Read more
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

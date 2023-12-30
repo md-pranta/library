@@ -1,0 +1,69 @@
+<!-- prettier-ignore -->
+{% extends "base.html" %} {% load static %}
+{% block title %}profile page
+{%endblock title %} {% block content %}
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+  <table
+    class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+  >
+    <thead class="text-xs uppercase dark:text-gray-900">
+      <tr>
+        <th scope="col" class="px-6 py-3">book name</th>
+        <th scope="col" class="px-6 py-3">user name</th>
+        <th scope="col" class="px-6 py-3">borrow date</th>
+        <th scope="col" class="px-6 py-3">Price</th>
+        <th scope="col" class="px-6 py-3">Action</th>
+        <th scope="col" class="px-6 py-3">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in data %}
+      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+        <th
+          scope="row"
+          class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+        >
+          <a class="text-blue-600" href="{% url 'details' i.book.id %}"
+            >{{i.book}}</a
+          >
+        </th>
+        <td
+          class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+        >
+          {{i.user}}
+        </td>
+        <td
+          class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+        >
+          {{i.borrowed_date}}
+        </td>
+        <td
+          class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+        >
+          {{i.book.price}}
+        </td>
+        <td
+          class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+        >
+          <a
+            href="{% url 'return' i.id %}"
+            class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+            >return book</a
+          >
+        </td>
+        <td
+          class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+        >
+          <a
+            href="{% url 'comment_views' i.book.id %}"
+            class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+            >Feedback
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock content %}
